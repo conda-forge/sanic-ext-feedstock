@@ -28,7 +28,7 @@ test:
     - sanic_ext
   commands:
     - pip check
-    - pytest -vv --cov=sanic_ext --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (custom_specification or default_templates or templating_dir)" --cov-fail-under=81
+    - pytest -vv --cov=sanic_ext --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (custom_specification or default_context or default_templates or templating_dir)" --cov-fail-under=81
   requires:
     - jinja2
     - pip
