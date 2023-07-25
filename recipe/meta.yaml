@@ -1,4 +1,4 @@
-{% set version = "23.3.0" %}
+{% set version = "23.6.0" %}
 
 package:
   name: sanic-ext
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/s/sanic-ext/sanic-ext-{{ version }}.tar.gz
-  sha256: 73c8b21061211cbfa8beb282b1cb052ec10033f3ab02fff854482b52bace5a4b
+  sha256: 81dd136b6b7b79fda8b4fec2444d9822394555779c298a89155c67287a184902
 
 build:
   noarch: python
