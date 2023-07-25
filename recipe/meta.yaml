@@ -37,7 +37,8 @@ test:
     - sanic-testing
     # extra test deps declared in tox.ini
     - attrs
-    - pydantic
+    - msgspec
+    - pydantic <2
     - sanic
 
 about:
