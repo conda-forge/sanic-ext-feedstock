@@ -1,24 +1,27 @@
 {% set version = "23.12.0" %}
+{% set test_skips = "custom_specification or default_context or default_templates or templating_dir" %}
 
 package:
   name: sanic-ext
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/s/sanic-ext/sanic-ext-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/s/sanic-ext/sanic-ext-{{ version }}.tar.gz
   sha256: 42fc41e7fafa58f3b790f685f3dd8a8de281460b4169d0e91f4e11b8747f845c
 
 build:
+  number: 1
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  script:
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
+    - setuptools
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - pyyaml >=3.0.0
 
 test:
@@ -28,7 +31,8 @@ test:
     - sanic_ext
   commands:
     - pip check
-    - pytest -vv --cov=sanic_ext --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (custom_specification or default_context or default_templates or templating_dir)" --cov-fail-under=81
+    - coverage run --source=sanic_ext --branch -m pytest -vv --tb=long --color=yes -k "not ({{ test_skips }})"
+    - coverage report --show-missing --skip-covered --fail-under=81
   requires:
     - jinja2
     - pip
@@ -40,6 +44,7 @@ test:
     - msgspec
     - pydantic <2
     - sanic
+    - python {{ python_min }}
 
 about:
   home: http://github.com/sanic-org/sanic-ext
