@@ -3,6 +3,8 @@ schema_version: 1
 
 context:
   version: 24.12.0
+  # see https://github.com/sanic-org/sanic-ext/blob/v24.12.0/sanic_ext/bootstrap.py#L42C15-L42C25
+  sanic_min: 21.3.2
 
 package:
   name: sanic-ext
@@ -11,6 +13,8 @@ package:
 source:
   url: https://pypi.org/packages/source/s/sanic-ext/sanic_ext-${{ version }}.tar.gz
   sha256: 8f912f4c29f242bc638346d09b79f0c8896ff64e79bd0e7fa09eac4b6c0e23c8
+  patches:
+    - 0000-no-test-site-packages.diff
 
 build:
   number: 0
@@ -26,12 +30,10 @@ requirements:
   run:
     - python >=${{ python_min }}
     - pyyaml >=3.0.0
+  run_constraints:
+    - sanic >=${{ sanic_min }}
 
 tests:
-  - python:
-      imports: sanic_ext
-      pip_check: true
-      python_version: ${{ python_min }}.*
   - files:
       recipe:
         - run_test.py
@@ -39,17 +41,20 @@ tests:
         - tests/
     requirements:
       run:
+        - attrs
         - jinja2
+        - msgspec
+        - pip
+        - pydantic <2
         - pytest-asyncio
         - pytest-cov
-        - sanic-testing
-        - attrs
-        - msgspec
-        - pydantic <2
+        - python ${{ python_min }}.*
         - sanic
-        - python ${{ python_min }}
+        - sanic-testing
     script:
+      - pip check
       - python run_test.py
+
 about:
   summary: Extend your Sanic installation with some core functionality.
   license: MIT
