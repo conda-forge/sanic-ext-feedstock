@@ -1,4 +1,4 @@
-{% set version = "23.12.0" %}
+{% set version = "24.12.0" %}
 {% set test_skips = "custom_specification or default_context or default_templates or templating_dir" %}
 
 package:
@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/s/sanic-ext/sanic-ext-{{ version }}.tar.gz
-  sha256: 42fc41e7fafa58f3b790f685f3dd8a8de281460b4169d0e91f4e11b8747f845c
+  url: https://pypi.org/packages/source/s/sanic-ext/sanic_ext-{{ version }}.tar.gz
+  sha256: 8f912f4c29f242bc638346d09b79f0c8896ff64e79bd0e7fa09eac4b6c0e23c8
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
