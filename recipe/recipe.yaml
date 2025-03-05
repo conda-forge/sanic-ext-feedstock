@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 24.12.0
+
+package:
+  name: sanic-ext
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/sanic-ext/sanic_ext-${{ version }}.tar.gz
+  sha256: 8f912f4c29f242bc638346d09b79f0c8896ff64e79bd0e7fa09eac4b6c0e23c8
+
+build:
+  number: 0
+  noarch: python
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - pyyaml >=3.0.0
+
+tests:
+  - python:
+      imports: sanic_ext
+      pip_check: true
+      python_version: ${{ python_min }}.*
+  - files:
+      recipe:
+        - run_test.py
+      source:
+        - tests/
+    requirements:
+      run:
+        - jinja2
+        - pytest-asyncio
+        - pytest-cov
+        - sanic-testing
+        - attrs
+        - msgspec
+        - pydantic <2
+        - sanic
+        - python ${{ python_min }}
+    script:
+      - python run_test.py
+about:
+  summary: Extend your Sanic installation with some core functionality.
+  license: MIT
+  license_file: LICENSE
+  homepage: http://github.com/sanic-org/sanic-ext
+  documentation: https://sanic.dev/en/plugins/sanic-ext/getting-started.html
+
+extra:
+  recipe-maintainers:
+    - bollwyvl
