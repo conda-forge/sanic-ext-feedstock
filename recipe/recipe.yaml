@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: 24.12.0
+  version: "25.12.0"
   # see https://github.com/sanic-org/sanic-ext/blob/v24.12.0/sanic_ext/bootstrap.py#L42C15-L42C25
   sanic_min: 21.3.2
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/s/sanic-ext/sanic_ext-${{ version }}.tar.gz
-  sha256: 8f912f4c29f242bc638346d09b79f0c8896ff64e79bd0e7fa09eac4b6c0e23c8
+  sha256: db6f5c8b880bb6b4cb73717b655b63aea4e77cf57825678ec74310fd69581ce1
   patches:
     - 0000-no-test-site-packages.diff
 
