@@ -3,8 +3,8 @@ schema_version: 1
 
 context:
   version: "25.12.0"
-  # see https://github.com/sanic-org/sanic-ext/blob/v24.12.0/sanic_ext/bootstrap.py#L42C15-L42C25
-  sanic_min: 21.3.2
+  # see https://github.com/sanic-org/sanic-ext/blob/v25.12.0/sanic_ext/bootstrap.py#L49
+  sanic_min: "25.12.0"
 
 package:
   name: sanic-ext
@@ -52,6 +52,7 @@ tests:
         - sanic
         - sanic-testing
     script:
+      # manual, as can't be imported without `sanic`
       - pip check
       - python run_test.py
 
