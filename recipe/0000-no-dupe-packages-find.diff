@@ -1,0 +1,15 @@
+diff --git a/setup.cfg b/setup.cfg
+index d655dd0..5b6e0dd 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -24,10 +24,6 @@ install_requires =
+ 	pyyaml>=3.0.0
+ 	sanic>=25.12.0
+ 
+-[options.packages.find]
+-exclude = 
+-	tests*
+-
+ [options.package_data]
+ sanic_ext = 
+ 	py.typed
